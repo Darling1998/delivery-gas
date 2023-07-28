@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  webService: 'http://192.168.0.114/wsProyectoGas/',
+  mapbox: {
+    accessToken: 'pk.eyJ1IjoiZGFybGluZzE5OTgiLCJhIjoiY2xrajNtcHM2MG13ZzNncWR3bDA2NDMxdCJ9.7M74ktuoBK_NyYJULcZcUw'
+  }
 };
 
 /*

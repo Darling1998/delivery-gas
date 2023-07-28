@@ -1,0 +1,30 @@
+.map {
+    width: 400px;
+    height: 100%;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  
+  .close-button,
+  .action-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .close-button {
+    color: var(--ion-color-papaya);
+    background-color: white;
+    border: 1px solid var(--ion-color-papaya);
+  }
+  
+  .action-button {
+    color: white;
+    background-color: var(--ion-color-papaya);
+  }
+  

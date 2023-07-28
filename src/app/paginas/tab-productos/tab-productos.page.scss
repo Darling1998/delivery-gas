@@ -1,0 +1,28 @@
+ .image-card {
+     border: 1px solid;
+     border-radius: 30px;
+ }
+
+ .image-container {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     height: 100%;
+ }
+
+ .img-tamaño {
+     width: 100%;
+     height: 100px;
+ }
+
+ .ion-float-left {
+     position: absolute;
+     top: 16px;
+     left: 16px;
+     z-index: 1;
+ }
+
+
+ .btn-edit {
+     border-radius: 1px;
+ }

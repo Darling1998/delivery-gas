@@ -1,0 +1,69 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class="ion-text-center"> {{titulo}} Producto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-card >
+    <form #formulario="ngForm" (ngSubmit)="grabar()">
+      <ion-grid>
+
+        <ion-row>
+          <ion-col style="width: 100% !important;">
+            <ion-item>
+              <ion-label position="floating">Nombre *:</ion-label>
+              <ion-input type="text" aria-label name="nombre" [(ngModel)]="objProducto.nombre" required></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col style="width: 100% !important;">
+            <ion-item>
+              <ion-label position="floating">Descripcion *:</ion-label>
+              <ion-input type="text" aria-label name="descripcion" [(ngModel)]="objProducto.descripcion" required></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col style="width: 100% !important;">
+            <ion-item>
+              <ion-label position="floating">Precio *:</ion-label>
+              <ion-input type="text" aria-label name="precio" [(ngModel)]="objProducto.precio" required></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col style="width: 100% !important;">
+            <ion-item>
+              <ion-label position="floating">Stock *:</ion-label>
+              <ion-input type="text" aria-label name="stock" [(ngModel)]="objProducto.stock" required></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col style="width: 100% !important;">
+            <ion-item>
+              <ion-label position="floating" style="margin-bottom: 15px;">Imagen del Producto:</ion-label>
+              <input type="file" style="display: none;" #fileInput (change)="onFileSelect($event)" id="fileInput" />
+              <ion-button class="custom-file-button" (click)="fileInput.click()" fill="clear">Seleccionar Archivo</ion-button>
+              <ion-text>{{ img }}</ion-text>
+            </ion-item>
+            
+          </ion-col>
+        </ion-row>
+
+
+         <ion-row class="ion-justify-content-center" style="padding-top: 50px;">
+        <ion-button type="submit" [disabled]="formulario.invalid" color="papaya">Grabar</ion-button>
+        <ion-button (click)="cancelar()" color="papaya">Cancelar</ion-button>
+      </ion-row>
+      </ion-grid>
+    </form>
+  </ion-card>
+</ion-content>

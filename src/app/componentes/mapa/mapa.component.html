@@ -1,0 +1,8 @@
+<!-- Map container -->
+<div id="map" class="map"></div>
+
+<!-- Buttons -->
+<div class="button-container">
+  <button class="close-button" (click)="cerrar()">Cerrar</button>
+  <button class="action-button" (click)="cambiarEstado()" *ngIf="id_perfil===1">Marcar Entrega</button>
+</div>

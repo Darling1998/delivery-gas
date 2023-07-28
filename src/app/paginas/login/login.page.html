@@ -1,0 +1,38 @@
+<ion-content>
+  <form [formGroup]="form">
+    <ion-grid >
+      <ion-row  style="margin-top: 50px;">
+        <ion-col class="img-container">
+          <img class="peq" src="../../../assets/img/logo_1.svg">
+          <h1>Inicio de sesión</h1>
+        </ion-col>
+      </ion-row>
+      <ion-row >
+        <ion-col size="12">
+        <ion-card style="margin-top: 50px;">
+            <ion-item  style="margin-top: 25px;" color="transparent">
+              <ion-input label="Correo" labelPlacement="floating" placeholder="Ingresa correo"  formControlName="correo"></ion-input>
+            </ion-item>
+            <ion-item  style="margin-top: 25px;" color="transparent">
+              <ion-input  [type]="showPassword ? 'text': 'password'" label="Contraseña" labelPlacement="floating" placeholder="Ingresa Password"  formControlName="contrasena"></ion-input>
+              <ion-icon class="ion-align-self-center" slot="end" [name]="passwordToggleIcon"
+              (click)="changeToogle()"></ion-icon>
+            </ion-item>
+            <ion-row class="ion-justify-content-center"  style="margin-top: 25px;margin-bottom:5px;" color="transparent">
+              <ion-button type="submit" color="papaya" shape="round" class="ion-align-center" (click)="sendLogin()">
+                  Ingresar
+              </ion-button>
+          </ion-row>
+        </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row style="margin-left: 20px;">
+        <ion-col size="12">
+          <p><strong>No tienes Cuenta?</strong></p>
+          <p><a href="registro">Registrate</a></p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

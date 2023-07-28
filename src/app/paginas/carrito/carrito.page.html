@@ -1,0 +1,138 @@
+<!-- carrito.page.html -->
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-title class="ion-text-center">Carrito</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col  *ngFor="let item of carritoNuevo">
+        <ion-card class="servicios">
+          <ion-list>
+            <ion-item-sliding>
+              <ion-item lines="none">
+                <ion-thumbnail slot="start">
+                  <img alt="" [src]="getImagenRuta(item.foto)" />
+                </ion-thumbnail>
+                <ion-label>
+                  <h2>{{item.nombreProducto}}</h2>
+                  <p class="precio-unitario">Precio Unitario:</p>
+                  <p> ${{item.precioUnitario}}</p>
+                </ion-label>
+                <ion-buttons slot="end">
+                  <ion-button (click)="decreaseQuantity(item)">
+                    <ion-icon slot="icon-only" name="remove"></ion-icon>
+                  </ion-button>
+                  <ion-label>{{ item.cant }}</ion-label>
+                  <ion-button (click)="increaseQuantity(item)">
+                    <ion-icon slot="icon-only" name="add"></ion-icon>
+                  </ion-button>
+                </ion-buttons>
+              </ion-item>
+
+              <ion-item-options side="end">
+                <ion-item-option color="danger" (click)="eliminarProducto(item)">Delete</ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+
+          </ion-list>
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row  *ngIf="carritoNuevo.length!=0">
+      <ion-col size="12">
+        <ion-card class=" servicios expandable-card" [ngClass]="{ 'expanded': isExpandedService }">
+          <ion-card-header>
+            <ion-card-title color="papaya">Servicios</ion-card-title>
+            <ion-icon [name]="isExpandedService ? 'chevron-up-outline' : 'chevron-down-outline'" (click)="toggleCardService()"></ion-icon>
+          </ion-card-header>
+        
+          <ion-card-content>
+            <ion-item-group>
+              <ion-radio-group (ionChange)="costoEntregaChange($event)">
+                <ion-item-group>
+                  <ion-item-divider style="margin-top: 10px;" *ngFor="let item of listaServicios; let i=index">
+                    <ion-row style="width: 100%;">
+                      <ion-col size="9">
+                        <ion-radio [value]="item.valor" color="papaya">{{item.descripcion}}</ion-radio><br />
+                      </ion-col>
+                      <ion-col size="3">
+                        <ion-label> ${{item.valor}}0</ion-label>
+                      </ion-col>
+                    </ion-row>
+                  </ion-item-divider>
+                </ion-item-group>
+              </ion-radio-group>
+            </ion-item-group>
+          </ion-card-content>
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="carritoNuevo.length!=0">
+      <ion-col size="12">
+        <ion-card class=" servicios expandable-card" [ngClass]="{ 'expanded': isExpanded }">
+          <ion-card-header>
+          
+            <ion-card-title color="papaya">Punto de Entrega</ion-card-title>
+            <ion-icon [name]="isExpanded ? 'chevron-up-outline' : 'chevron-down-outline'" (click)="toggleCard()"></ion-icon>
+          </ion-card-header>
+        
+          <ion-card-content>
+            <ion-list>
+              <ion-item>
+                <ion-toggle color="papaya" (ionChange)="getPosicion()">Obtener Posición Actual</ion-toggle>
+              </ion-item>
+              <ion-item lines="none">
+                <ion-label>
+                  <p style="font-size: 13px;margin-top: 0;padding-top: 0;">Latitud: {{latitud}} </p>
+                  <p style="font-size: 13px;margin-top: 0;padding-top: 0;">Longitud: {{longitud}} </p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center ion-text-center"  *ngIf="carritoNuevo.length!=0">
+      <ion-col size-md="6">
+        <ion-label class="factura">Subtotal</ion-label>
+        <p> {{subtotal | currency:'USD'}}</p>
+       
+      </ion-col>
+      <ion-col size-md="6">
+        <ion-label  class="factura">Iva</ion-label>
+        <p>{{iva | currency:'USD'}}</p> 
+      </ion-col>
+      <ion-col size-md="12">
+        <ion-label  class="factura">Total</ion-label>
+        <p>{{totalCompra | currency:'USD' }}</p>
+      </ion-col>
+    </ion-row>
+
+    <ion-button (click)="crearPedido()" expand="block" shape="round" *ngIf="carritoNuevo.length!=0" color="papaya">
+      Pedir
+    </ion-button>
+    <ion-button (click)="closeModal()" fill="outline" expand="block" shape="round" color="papaya" *ngIf="carritoNuevo.length!=0">
+      Cancelar
+    </ion-button>
+  </ion-grid>
+
+
+  <div class="empty-cart"  *ngIf="carritoNuevo.length===0">
+    <ion-icon class="car-ion-icon" name="cart-outline"></ion-icon>
+    <p>Tu carrito de compras está vacío</p>
+
+    <ion-button (click)="closeModal()" expand="block" shape="fill" color="papaya">
+      Agg Productos
+    </ion-button>
+  </div>
+</ion-content>

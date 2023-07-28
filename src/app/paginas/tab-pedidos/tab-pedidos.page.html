@@ -1,0 +1,125 @@
+<ng-container>
+  <ion-header class="ion-no-border">
+    <ion-toolbar>
+      <ion-title class="ion-text-center" style="margin-top: 20px; margin-bottom: 10px;">Pedidos</ion-title>
+
+      <ion-segment color="papaya" [(ngModel)]="type" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="nuevos">
+          <ion-label class="ion-text-capitalize segmentos">Nuevos</ion-label>
+        </ion-segment-button>
+  
+        <ion-segment-button value="entregados">
+          <i class="fas fa-2x fa-wine-bottle"></i>
+          <ion-label class="ion-text-capitalize segmentos">Entregados</ion-label>
+        </ion-segment-button>
+        </ion-segment>
+    </ion-toolbar>
+
+  </ion-header>
+
+  <ion-content [fullscreen]="true">
+    <div [ngSwitch]="type">
+      <div *ngSwitchCase="'nuevos'" class="ion-margin-bottom">
+        <ion-list *ngFor="let item of nuevos; let i=index;">
+           <ion-item lines="none">
+            <ion-card style=" width: 100%;">
+
+              <ion-button color="uva" fill="outline" class="ion-float-right btn-edit" (click)="abrirUbicacion(item)" >
+                <ion-icon name="navigate-circle-outline" color="uva"></ion-icon>
+              </ion-button>
+              
+
+              <ion-card-header *ngIf="idPerfil === 1">
+                <ion-card-title>Pedido #: {{ item.idPedido }}</ion-card-title>
+                <ion-card-subtitle>{{ item.fecha }}</ion-card-subtitle>
+                <p style="margin-bottom: 0;"><strong>Dirigido a:</strong> {{ item.nombreCliente }} {{ item.apellidos }}</p>
+                <p style="margin-top: 0;"> <strong>Telefono:</strong> {{ item.telefono }}</p>
+              </ion-card-header>
+              
+
+              <ion-card-header *ngIf="idPerfil===2">
+                <ion-card-title>Pedido #: {{nuevos.length - i}}</ion-card-title>
+                <ion-card-subtitle> {{item.fecha}} </ion-card-subtitle>
+              </ion-card-header>
+            
+              <ion-card-content>
+                <ion-list *ngFor="let opc of item.productos">
+                  <ion-item lines="none">
+                    <ion-thumbnail slot="start">
+                      <img alt="Silhouette of mountains"[src]="getImagenRuta(opc.foto)" />
+                    </ion-thumbnail>
+                      <ion-col size-md="6" class="ion-text-center">
+                        <ion-label style="font-weight: bold;">Cantidad</ion-label>
+                        <p> {{opc.cantidades }}</p>
+                      </ion-col>
+                      <ion-col size-md="6" class="ion-text-center">
+                        <ion-label  style="font-weight: bold;">Nombre</ion-label>
+                        <p>{{opc.nombre }}</p> 
+                      </ion-col>
+                  </ion-item>
+                </ion-list>    
+              </ion-card-content>
+            </ion-card>
+          </ion-item> 
+        </ion-list>
+      </div>
+      <div *ngSwitchCase="'entregados'" class="ion-margin-bottom">
+        <ion-list *ngFor="let itemEntregados of entregados; let i=index">
+          <ion-item lines="none">
+           <ion-card style=" width: 100%;">
+            <ion-card-header *ngIf="idPerfil===1">
+              <ion-card-title>Pedido #: {{itemEntregados.idPedido}}</ion-card-title>
+              <ion-card-subtitle> {{itemEntregados.fecha}} </ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-header *ngIf="idPerfil===2">
+              <ion-card-title>Pedido #: {{entregados.length - i}}</ion-card-title>
+              <ion-card-subtitle> {{itemEntregados.fecha}} </ion-card-subtitle>
+            </ion-card-header>
+           
+             <ion-card-content>
+              <ion-list *ngFor="let opc of itemEntregados.productos">
+                <ion-item lines="none">
+                  <ion-thumbnail slot="start">
+                    <img alt="Silhouette of mountains"[src]="getImagenRuta(opc.foto)" />
+                  </ion-thumbnail>
+                    <ion-col size-md="6" class="ion-text-center">
+                      <ion-label style="font-weight: bold;">Cantidad</ion-label>
+                      <p> {{opc.cantidades }}</p>
+                    </ion-col>
+                    <ion-col size-md="6" class="ion-text-center">
+                      <ion-label  style="font-weight: bold;">Nombre</ion-label>
+                      <p>{{opc.nombre }}</p> 
+                    </ion-col>
+                </ion-item>
+              </ion-list>   
+
+              <ng-container *ngIf="idPerfil === 1">
+                <ng-container *ngIf="itemEntregados.status === '1'">
+                  <app-star [initialRating]="stringToStars(itemEntregados.star)" [readOnly]="true"></app-star>
+                  <p>Calificación: {{ itemEntregados.star }}</p>
+                </ng-container>
+                <ng-container *ngIf="itemEntregados.status !== '1'">
+                  <p>El pedido aún no ha sido calificado.</p>
+                </ng-container>
+              </ng-container>
+  
+              <ng-container *ngIf="idPerfil !== 1">
+                <ng-container *ngIf="itemEntregados.status !== '1'">
+                  <app-star (initialRating)="stringToStars(itemEntregados.star)" [readOnly]="false" (ratingChange)="onRatingChange($event, itemEntregados.idPedido)"></app-star>
+                  <p>Calificación: {{ itemEntregados.star }}</p>
+                </ng-container>
+                <ng-container *ngIf="itemEntregados.status === '1'">
+                  <p>El pedido ya ha sido calificado con {{ itemEntregados.star }} estrellas.</p>
+                </ng-container>
+              </ng-container>
+            </ion-card-content>
+           </ion-card>
+         </ion-item> 
+       </ion-list>
+      </div>
+    </div>
+  </ion-content>
+  
+
+</ng-container>

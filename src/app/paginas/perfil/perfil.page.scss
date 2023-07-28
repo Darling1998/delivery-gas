@@ -1,0 +1,18 @@
+.oculto {
+    display: none;
+  }
+  
+/* Styles for the input fields */
+ion-input {
+  --padding-start: 15px; /* Adjust the left padding */
+  --padding-end: 15px; /* Adjust the right padding */
+  --border-radius: 15px; /* Set the border-radius to make it rounded */
+  --background: #f0f0f0; /* Set the background color of the input */
+  --placeholder-color: #a0a0a0; /* Set the placeholder color */
+}
+
+
+/* Styles for the form button */
+ion-button {
+  --border-radius: 15px; /* Set the border-radius to make it rounded */
+}

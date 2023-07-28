@@ -1,0 +1,23 @@
+<ion-menu side="end" menuId="primerMenu" contentId="principal">
+  <ion-header class="ion-no-border">
+    <ion-toolbar color="papaya">
+      <ion-title class="ion-text-center">GAS APP</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <ion-list>
+      <ion-item (click)="navegarA('/perfil')"  *ngIf="idPerfil===2">
+        <ion-icon color="papaya" name="person-outline" slot="start"></ion-icon>
+        <ion-label>Mi Perfil</ion-label>
+      </ion-item>
+
+      <ion-item (click)="cerrarCesion()">
+        <ion-icon color="papaya" name="person-outline" slot="start"></ion-icon>
+        <ion-label>Cerrar Sesión</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+

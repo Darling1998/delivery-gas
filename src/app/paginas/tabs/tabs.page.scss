@@ -1,0 +1,10 @@
+ion-tab-button{
+    --background-focused: var(--ion-color-papaya);
+    --color-selected: var(--ion-color-papaya);
+}
+  
+  ion-tab-button[aria-selected="true"] {
+    --background-selected: var(--ion-color-papaya);
+    --background-color: yellow;
+  }
+  
